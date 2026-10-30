@@ -1,0 +1,81 @@
+numbers = [12, 3, 4, 14, -12, 5, 10, 16, -4]
+positive = []
+negative = []
+even = []
+multiples_of_3 = []
+
+for number in numbers:
+    if number > 0:
+        positive.append(number)
+    if number < 0:
+        negative.append(number)
+    if number % 2 == 0:
+        even.append(number)
+    if number % 3 == 0:
+        multiples_of_3.append(number)
+
+min_val = min(numbers)
+max_val = max(numbers)
+total_sum = sum(numbers)
+average_val = total_sum / len(numbers)
+
+print("Додатні:", positive)
+print("Від’ємні:", negative)
+print("Парні:", even)
+print("Кратні 3:", multiples_of_3)
+print(f"Min: {min_val}; Max: {max_val}; Sum: {total_sum}; Average: {average_val:.2f}")
+
+----------------------------------------------------------
+
+group1 = {'Anna', 'Ivan', 'Olha'}
+group2 = {'Ivan', 'Maksym', 'Olha'}
+
+common = group1 & group2
+only_group1 = group1 - group2
+only_group2 = group2 - group1
+all_unique = group1 | group2
+
+print("Спільні:", ", ".join(common))
+print("Тільки group1:", ", ".join(only_group1))
+print("Тільки group2:", ", ".join(only_group2))
+print("Усі:", ", ".join(all_unique))
+
+--------------------------------------------------------------------
+
+catalog = {
+    "bread": 35,
+    "milk": 48,
+    "cheese": 120
+}
+
+catalog["tea"] = 75
+catalog["bread"] = 38
+
+min_price = 40
+max_price = 100
+
+for product, price in catalog.items():
+    if min_price <= price <= max_price:
+        print(f"{product} — {price} грн")
+
+------------------------------------------------------------------------
+
+group_info = ('10-IT', '2026/2027')
+journal = {
+    "Anna":,
+    "Ivan": [8, 9, 10, 11, 9]
+}
+
+print(f"{group_info[0]} — {group_info[1]}")
+
+best_student = ""
+best_average = 0
+
+for name, grades in journal.items():
+    avg = sum(grades) / len(grades)
+    print(f"{name} — {avg:.1f}")
+    if avg > best_average:
+        best_average = avg
+        best_student = name
+
+print(f"Найкращий результат: {best_student} — {best_average:.1f}")
