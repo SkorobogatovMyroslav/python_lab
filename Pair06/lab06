@@ -1,1 +1,132 @@
+import math
+import random
+import statistics
+from datetime import date
+import tkinter as tk
+
+radius = float(input("Введіть радіус круга: "))
+cathetus_a = float(input("Введіть перший катет: "))
+cathetus_b = float(input("Введіть другий катет: "))
+items = int(input("Введіть кількість предметів: "))
+capacity = int(input("Введіть місткість однієї упаковки: "))
+
+circle_area = round(math.pi * (radius ** 2), 2)
+hypotenuse = round(math.sqrt(cathetus_a ** 2 + cathetus_b ** 2), 2)
+packages = math.ceil(items / capacity)
+
+print("Площа круга:", circle_area)
+print("Гіпотенуза:", hypotenuse)
+print("Потрібно упаковок:", packages)
+
+--------------------------------------------------------------------------------------------------------
+
+n = int(input("Введіть кількість оцінок N: "))
+
+if n > 0:
+    grades = []
+    for _ in range(n):
+        grades.append(random.randint(1, 12))
+
+    min_grade = min(grades)
+    max_grade = max(grades)
+    mean_grade = round(statistics.mean(grades), 2)
+    median_grade = statistics.median(grades)
+
+    high_grades_count = 0
+    for grade in grades:
+        if grade >= 10:
+            high_grades_count += 1
+
+    print("Оцінки:", grades)
+    print("Min:", min_grade)
+    print("Max:", max_grade)
+    print("Середнє:", mean_grade)
+    print("Медіана:", median_grade)
+    print("Оцінок 10–12:", high_grades_count)
+else:
+    print("Помилка: кількість оцінок N повинна бути додатним числом.")
+
+---------------------------------------------------------------------------------
+
+year = int(input("Введіть рік події: "))
+month = int(input("Введіть місяць події: "))
+day = int(input("Введіть день події: "))
+
+event_date = date(year, month, day)
+today = date.today()
+difference = event_date - today
+
+if difference.days > 0:
+    print(f"До події залишилося: {difference.days} днів")
+elif difference.days < 0:
+    print(f"Після події минуло: {abs(difference.days)} днів")
+else:
+    print("Подія відбувається сьогодні!")
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+def generate_grades(count):
+    grades = []
+    for _ in range(count):
+        grades.append(random.randint(1, 12))
+    return grades
+
+def average_grade(grades):
+    return round(statistics.mean(grades), 2)
+
+def get_level(average):
+    if average >= 10:
+        return "високий"
+    elif average >= 7:
+        return "достатній"
+    elif average >= 4:
+        return "середній"
+    else:
+        return "початковий"
+
+def create_report():
+    value = count_entry.get().strip()
+
+    if not value.isdecimal():
+        result_text.delete("1.0", tk.END)
+        result_text.insert(tk.END, "Помилка: введіть ціле число від 1 до 20.")
+        return
+
+    count = int(value)
+    if count < 1 or count > 20:
+        result_text.delete("1.0", tk.END)
+        result_text.insert(tk.END, "Помилка: кількість оцінок має бути в межах від 1 до 20.")
+        return
+
+    students = ["Anna", "Ivan", "Olha"]
+    report_lines = []
+
+    for student in students:
+        grades = generate_grades(count)
+        avg = average_grade(grades)
+        lvl = get_level(avg)
+        report_lines.append(f"{student}: {grades} → {avg} → {lvl}")
+
+    final_report = "\n".join(report_lines)
+
+    print(final_report)
+
+    result_text.delete("1.0", tk.END)
+    result_text.insert(tk.END, final_report)
+
+window = tk.Tk()
+window.title("Статистика учнів")
+window.geometry("520x350")
+
+tk.Label(window, text="Введіть кількість оцінок для кожного учня (1–20):").pack(pady=5)
+
+count_entry = tk.Entry(window, width=20)
+count_entry.pack(pady=5)
+
+tk.Button(window, text="Сформувати звіт", command=create_report).pack(pady=10)
+
+result_text = tk.Text(window, width=60, height=10)
+result_text.pack(pady=10)
+
+window.mainloop()
 
